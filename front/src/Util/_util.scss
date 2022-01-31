@@ -1,0 +1,33 @@
+// 반응형을 위한 scss 파일
+@import "./variable";
+
+$mobile: 767px;
+$tablet: 1023px;
+$desktop: 1024px;
+
+@mixin mobile {
+  @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin input {
+    background: #F5F5F5;
+    border : none;
+    border-radius: 4px;
+    width : 300px;
+    height: 30px;
+    padding : 10px 30px;
+}

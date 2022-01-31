@@ -1,0 +1,35 @@
+@import "../../Util/util";
+.login{
+    margin-top : 25px;
+    input{
+        @include input;
+        margin-bottom: 15px;
+    }
+    &_button{
+        margin-bottom: 15px;
+        cursor: pointer;
+        border : none;
+        border-radius: 4px;
+        color : white;
+        background: #0a5ca8;
+        width : 360px;
+        height: 50px;
+    }
+    .singUpFind{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .divider{
+            margin : 0px 15px;
+        }
+        button{
+            margin-top : 5px;
+            border : none;
+            background: none;
+            cursor: pointer;
+            &:hover{
+                color : #0a5ca8; 
+            }
+        }
+    }
+}
