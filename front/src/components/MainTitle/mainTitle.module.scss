@@ -1,5 +1,9 @@
+@import "/src/Util/util";
 .mainTitle{
-    margin-top : 200px;
+    margin-top : 150px;
+    @include mobile {
+        margin-top : 150px;
+    }
     font-size: 50px;
     font-weight: 600;
 }

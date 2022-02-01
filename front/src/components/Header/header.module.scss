@@ -35,4 +35,23 @@
         gap : 10px;
 
     }
+    &_userNickname{
+        display : flex;
+        font-size: 15px;
+        gap :5px;
+        align-items: center;
+        .info{
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .infomodal{
+            position: absolute;
+            top: 80%;
+            width: 120px;
+            @include mobile{
+                right : 0;
+            }
+        }
+    }
 }

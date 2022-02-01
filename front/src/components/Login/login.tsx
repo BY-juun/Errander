@@ -1,19 +1,23 @@
 import React, { useCallback, VFC } from 'react';
 import { Link } from 'react-router-dom';
-import useInput from '../../Util/hooks/useInput';
+import { useSetRecoilState } from 'recoil';
+import {userNickNameInfo} from 'recoil/account/states';
+import useInput from 'Util/hooks/useInput';
 import styles from './login.module.scss';
 
 const Login : VFC = () => {
-    const [id, setId, onChangeId] = useInput("");
-    const [pwd, setPwd, onChangPwd] = useInput("");
+    const [id,, onChangeId] = useInput("");
+    const [pwd,, onChangPwd] = useInput("");
+    const setUserNickname = useSetRecoilState(userNickNameInfo);
 
     const onSubmit = useCallback((e)=>{
         //로그인 정보를 포함한 비동기 요청
         e.preventDefault();
         console.log(id);
         console.log(pwd);
-        //성공이면 로그인, 실패면 alert
-    },[id,pwd])
+        setUserNickname("병준");
+    },[id,pwd,setUserNickname]);
+
     return(
         <form className={styles.login} onSubmit={onSubmit}>
             <div className={styles.login_input}>
