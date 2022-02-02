@@ -1,6 +1,6 @@
 @import "../../Util/util";
 .login{
-    margin-top : 75px;
+    margin-top : 50px;
     input{
         @include input;
         margin-bottom: 15px;
@@ -31,5 +31,12 @@
                 color : #0a5ca8; 
             }
         }
+    }
+    .socialBtn{
+        margin-top : 25px;
+        display : flex;
+        align-items: center;
+        justify-content: center;
+        gap : 5%;
     }
 }

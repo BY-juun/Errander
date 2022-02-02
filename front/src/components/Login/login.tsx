@@ -4,6 +4,9 @@ import { useSetRecoilState } from 'recoil';
 import {userNickNameInfo} from 'recoil/account/states';
 import useInput from 'Util/hooks/useInput';
 import styles from './login.module.scss';
+import {SiKakaotalk} from 'react-icons/si';
+import {AiFillFacebook,AiFillGoogleSquare} from 'react-icons/ai';
+
 
 const Login : VFC = () => {
     const [id,, onChangeId] = useInput("");
@@ -33,6 +36,11 @@ const Login : VFC = () => {
                 <Link to='/signUp'><button className={styles.signupbutton}>회원가입</button></Link>
                 <div className={styles.divider}>|</div>
                 <Link to='/findAccount'><button>ID/PW찾기</button></Link>
+            </div>
+            <div className={styles.socialBtn}>
+                <SiKakaotalk style={{width : "50px", height : "50px", color : "#fae301", background : "#391b1b",borderRadius:"16px", cursor: "pointer"}}/>
+                <AiFillFacebook style={{width : "60px", height : "60px", color : "#4267b2" , cursor: "pointer"}}/>
+                <AiFillGoogleSquare style={{width : "60px", height : "60px", color : "#ce5643", cursor: "pointer"}}/>
             </div>
         </form>
     )

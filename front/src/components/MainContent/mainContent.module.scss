@@ -1,15 +1,18 @@
 @import "../../Util/util";
 
 .mainContentRoot{
-    display : flex;
+    display : grid;
     gap : 20px;
-    flex-flow: wrap;
-    justify-content: center;
+    @include desktop{
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+    }
     @include mobile{
-        gap : 0px;
+        gap : 10px;
+        justify-content: center;
     }
     &_item{
-        width: 250px;
+        width: 80%;
         position: relative;
         height: 100px;
         margin-bottom: 20px;
@@ -17,7 +20,7 @@
         border-radius: 5px;
         box-shadow: 0 1px 6px rgb(0 0 0 / 10%);
         text-align: start;
-        padding : 30px;
+        padding : 10%;
         &:before {
             z-index: -1;
             content: "";

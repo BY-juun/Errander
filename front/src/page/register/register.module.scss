@@ -1,8 +1,8 @@
 @import "../../Util/util";
 .registerRoot{
-    margin-top: 150px;
+    margin-top: 125px;
     text-align: center;
-    padding : 0 500px;
+    padding : 0 20%;
     @include mobile{
         padding : 0 20px;
     }
@@ -33,7 +33,7 @@
         input{
             padding: 16.5px 14px;
             border-radius: 4px;
-            width: 225px;
+            width: 230px;
             border : 0.5px solid lightgrey;
         }
     }
@@ -45,12 +45,39 @@
         input{
             padding: 16.5px 14px;
             border-radius: 4px;
-            width: 225px;
+            width: 230px;
             border : 0.5px solid lightgrey;
         }
     }
-    .pickUpPosition{
-        text-align: start;
-        font-size: 20px;
+    .requirements{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        @include mobile{
+            margin-top : 50px;
+        }
+        textarea{
+            margin-top: 15px;
+            width : 315px;
+            height : 200px;
+            padding : 15px;
+            font-size : 15px;
+            border : 0.5px solid lightgrey;
+        }
+    }
+
+    .nextBtn
+    {   
+        margin-top: 15px;
+        display: flex;
+        button{
+            font-size: 15px;
+            width : 345px;
+            padding : 15px;
+            border : 1px solid #0a5ca8;
+            border-radius: 4px;
+            background: #0a5ca8;
+            color : white;
+        }
     }
 }
