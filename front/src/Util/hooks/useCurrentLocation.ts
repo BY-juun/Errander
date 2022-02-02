@@ -7,8 +7,6 @@ const useCurrentLocation = (options = {}) => {
     const [error, setError] = useState('');
     const handleSuccess = (pos : any) => {
         const { latitude , longitude } : {latitude : string, longitude : string}  = pos.coords;
-        console.log(latitude);
-        console.log(longitude);
         setLocation({
           latitude,
           longitude,

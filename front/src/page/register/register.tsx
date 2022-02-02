@@ -1,25 +1,34 @@
+
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Header from 'components/Header/header';
 import PickUpPos from 'components/pickUpPos/pickUpPos';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import useInput from 'Util/hooks/useInput';
 import styles from './register.module.scss';
 
 
 
 
 const Register = () => {
-    const [classification, setClassification] = useState("");
+    const [classification, setClassification] = useState<string>("");
+    const [detail,, onChangeDetail] = useInput(""); 
+    const [deliveryPrice,, onChangeDeliveryPrice] = useInput("");
+    const [additionalRequest,, onChangeAdditionalRequest] = useInput("");
     const [step, setStep] = useState(1);
-    const [openModal, setOpenModal] = useState(false);
-    
-    //현재 위치정보
+    const [pickUpPos, setPickUpPos] = useState({La:0,Ma:0});
+
     const handleChange = useCallback((e)=>{
         setClassification(e.target.value);
     },[])
 
     const gotoNextStep = useCallback(()=>{
+        if(!detail || !deliveryPrice || !classification){
+            alert("추가 요구사항을 제외한 모든 항목을 작성해주세요.");
+            return;
+        }
         setStep(2);
-    },[step]);
+    },[detail,deliveryPrice,classification]);
+
     return(
         <>
             <Header></Header>
@@ -48,24 +57,28 @@ const Register = () => {
                     </div>
                     <div className={styles.detailItem}>
                         <div>상세품목</div>
-                        <input></input>
+                        <input value={detail} onChange={onChangeDetail}></input>
                     </div>
                     <div className={styles.deliveryPrice}>
                         <div>배달비</div>
-                        <input></input>
+                        <input type="number" placeholder='숫자만 입력해주세요.' value={deliveryPrice} onChange={onChangeDeliveryPrice}></input>
                     </div>
                     <div className={styles.requirements}>
                         <div>추가 요청 사항</div>
-                        <textarea></textarea>
+                        <textarea value={additionalRequest} onChange={onChangeAdditionalRequest}></textarea>
                     </div>
                     <div className={styles.nextBtn}>
-                        <button onClick={gotoNextStep}>다음</button>
+                        <button onClick={gotoNextStep} >다음</button>
                     </div>
                 </div>
                 </>
                 :
                 <>
-                <PickUpPos/>
+                <PickUpPos setPickUpPos={setPickUpPos} 
+                classification = {classification} 
+                detail={detail} 
+                deliveryPrice={deliveryPrice}
+                pickUpPos={pickUpPos}/>
                 </>
                 }
                 

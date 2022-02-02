@@ -9,7 +9,7 @@
     }
     @include mobile{
         gap : 10px;
-        justify-content: center;
+        justify-items: center;
     }
     &_item{
         width: 80%;
@@ -29,7 +29,7 @@
             background-image: url(/img/deliver.png);
             background-repeat: no-repeat;
             background-size: 125px;
-            background-position: 110% 10px;
+            background-position: 105% 20px;
             @include mobile{
                 background-position: 110% -10px;
             }
@@ -42,7 +42,7 @@
         &:hover {
             &:before {
               transition-duration: 0.5s;
-              background-position: 100% 10px;
+              background-position: 95% 20px;
               background-color: #f9f9f9;
             }
           }

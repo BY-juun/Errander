@@ -1,5 +1,4 @@
-import React from 'react';
-import { useCallback } from 'react';
+import React,{ useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import styles from './mainContent.module.scss';
 
@@ -7,16 +6,16 @@ const MainContent = () => {
     const navigate = useNavigate();
     const gotoList = useCallback(()=>{
         navigate('/list');
-    },[]);
+    },[navigate]);
     const gotoRegisger = useCallback(()=>{
         navigate('/register')
-    },[]);
+    },[navigate]);
     const gotoMyOrder = useCallback(()=>{
         navigate('/myorder')
-    },[]);
+    },[navigate]);
     const gotoInquire = useCallback(()=>{
         navigate('/inquire')
-    },[]);
+    },[navigate]);
     
     return(
         <>

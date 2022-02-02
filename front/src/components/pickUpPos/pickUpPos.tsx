@@ -1,5 +1,6 @@
 import Header from 'components/Header/header';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import useCurrentLocation from 'Util/hooks/useCurrentLocation';
 import styles from './pickUpPos.module.scss';
 
@@ -18,8 +19,16 @@ declare global {
 
 const { kakao } = window;
 
+interface Props{
+    setPickUpPos : ({La , Ma }:{La:number, Ma:number}) => void;
+    classification : string;
+    detail : string;
+    deliveryPrice : string;
+    pickUpPos : {La : number, Ma : number};
+}
 
-const PickUpPos = () => {
+const PickUpPos = ({setPickUpPos,classification,detail,deliveryPrice,pickUpPos}:Props) => {
+    const navigate = useNavigate();
     const {location : currentLocation, error : currentError} = useCurrentLocation(geolocationOptions);
     useEffect(()=>{
         if(currentLocation){
@@ -34,14 +43,35 @@ const PickUpPos = () => {
                 position: markerPosition
             });
             marker.setMap(map);
-            marker.setDraggable(true); 
+            marker.setDraggable(true);
+            kakao.maps.event.addListener(marker, 'dragend', function(){
+                const {La ,Ma } = marker.getPosition()
+                setPickUpPos({
+                    La : La,
+                    Ma : Ma,
+                });
+            })
         }
-    },[currentLocation,currentError]);
+    },[setPickUpPos,currentLocation]);
+
+    const onClickConfirm = useCallback((e : React.MouseEvent<HTMLElement>)=>{
+        e.preventDefault();
+        if(window.confirm("주문을 완료하시겠습니까?")){
+            console.log(classification);
+            console.log(detail);
+            console.log(deliveryPrice);
+            console.log(pickUpPos);
+            alert("주문이 완료되었습니다!");
+            navigate('/');
+        }
+    },[classification,detail,deliveryPrice,pickUpPos,navigate]);
+
     return(
         <>
             <div className={styles.pickUpRoot}>
+                <div className={styles.pickUpRoot_description}>픽업받을 장소를 선택해주세요.</div>
                 <div id="map" style={{width:"100%", height:"500px", borderRadius : "4px"}}></div>
-                <button className={styles.closeBtn}>확인</button>
+                <button className={styles.closeBtn} onClick={onClickConfirm}>확인</button>
             </div>
         </>
     )
