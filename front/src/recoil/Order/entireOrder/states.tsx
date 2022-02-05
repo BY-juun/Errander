@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 import { OrderInfo } from "types/types";
 
-export const myOrderInfo = atom<Array<OrderInfo>>({ //나중에 selector로 비동기 처리로 바꿔야한다.
-    key : 'myOrderInfo',
+export const entireOrderInfo = atom<Array<OrderInfo>>({ //나중에 selector로 비동기 처리로 바꿔야한다.
+    key : 'entireOrderInfo',
     default : [
         {
             orderIdx : 1,

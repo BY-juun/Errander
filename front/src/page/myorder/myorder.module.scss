@@ -1,8 +1,0 @@
-@import "../../Util/util";
-.myorderRoot{
-    margin-top: 125px;
-    padding : 0 20%;
-    @include mobile{
-        padding : 0 20px;
-    }
-}

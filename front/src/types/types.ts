@@ -5,5 +5,6 @@ export interface OrderInfo{
     detail : string,
     deliveryPrice : number,
     additionalRequest : string,
+    pickUpTime : Date,
     pickUpPos : {La : number,Ma : number},
 }

@@ -7,9 +7,10 @@ import { OrderInfo } from 'types/types';
 
 interface Props{
     dataList : Array<OrderInfo>;
+    isEntireOrder : boolean,
 }   
 
-const ShowData = ({dataList} : Props) => {
+const ShowData = ({dataList,isEntireOrder} : Props) => {
     return(
         <div>
             <TableContainer component={Paper}>
@@ -22,7 +23,7 @@ const ShowData = ({dataList} : Props) => {
                     </TableHead>
                     <TableBody>
                         {dataList.map((row,idx)=>(
-                            <Row key={idx} data={row}/>
+                            <Row key={idx} data={row} idx={idx} isEntireOrder={isEntireOrder}/>
                         ))}
                     </TableBody>
                 </Table>

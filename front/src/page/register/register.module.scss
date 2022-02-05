@@ -1,20 +1,28 @@
 @import "../../Util/util";
 .registerRoot{
     margin-top: 125px;
-    text-align: center;
-    padding : 0 20%;
+    padding : 0 35%;
     @include mobile{
         padding : 0 20px;
     }
-    .title{
-        font-size: 25px;
-        font-weight: 700;
+
+    .titleHeader{
+        display : flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
         margin-bottom: 30px;
+        .title{
+            font-size: 25px;
+            font-weight: 700;
+
+        }
+        
     }
     .registerContent{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         @include mobile{
             margin-left : 0px;
         }
@@ -22,59 +30,105 @@
 
     .classification{
         //margin: 0 auto;
+        width : 100%;
+        &_title{
+            width : 20%;
+            margin-right : 10%;
+        }
         display : flex;
+        justify-content: flex-start;
         align-items: center;
-        gap : 57px;
         margin-bottom: 25px;
     }
     .detailItem{
         display: flex;
+        justify-content: flex-start;
         align-items: center;
-        gap : 30px;
         margin-bottom: 25px;
+        width : 100%;
+        &_title{
+            width : 20%;
+            margin-right: 12%;
+        }
         input{
             padding: 16.5px 14px;
             border-radius: 4px;
-            width: 230px;
+            width: 70%;
             border : 0.5px solid lightgrey;
         }
     }
     .deliveryPrice{
         display: flex;
         align-items: center;
-        gap : 45px;
+        justify-content: flex-start;
         margin-bottom: 25px;
+        width: 100%;
+        &_title{
+            width : 20%;
+            margin-right: 12%;
+        }
         input{
             padding: 16.5px 14px;
             border-radius: 4px;
-            width: 230px;
+            width: 70%;
             border : 0.5px solid lightgrey;
+        }
+    }
+
+    .timePicker{
+        display : flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        &_title{
+            width : 20%;
+            margin-right: 16%;
+            @include mobile{
+                width: 25%;
+                margin-right: 13%;
+            }
+        }
+        div{
+            width : 100%;
         }
     }
     .requirements{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        @include mobile{
-            margin-top : 50px;
-        }
+        width: 100%;
+        margin-top : 25px;
         textarea{
             margin-top: 15px;
-            width : 315px;
-            height : 200px;
-            padding : 15px;
+            width : 90%;
+            height : 75px;
+            padding : 5%;
             font-size : 15px;
             border : 0.5px solid lightgrey;
         }
     }
 
+    .setUpPickUp{
+        width : 100%;
+        margin-top: 25px;
+        button{
+            cursor: pointer;
+            width : 100%;
+            border : 1px solid #0086C5;
+            background : #0086C5;
+            border-radius: 4px;
+            color : white;
+            font-size: 15px;
+            padding : 15px;
+        }
+    }
     .nextBtn
     {   
-        margin-top: 15px;
-        display: flex;
+        margin-top: 25px;
+        width : 100%;
         button{
             font-size: 15px;
-            width : 345px;
+            width: 100%;
             padding : 15px;
             border : 1px solid #0a5ca8;
             border-radius: 4px;
@@ -82,4 +136,7 @@
             color : white;
         }
     }
+
+
+
 }

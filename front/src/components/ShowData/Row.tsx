@@ -1,5 +1,5 @@
 import { Collapse, IconButton, TableCell, TableRow, Tooltip } from '@mui/material';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState,useEffect } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -13,19 +13,22 @@ import { myOrderInfo } from 'recoil/Order/myOrder/states';
 
 interface Props{
     data : OrderInfo,
+    idx : number,
+    isEntireOrder : boolean,
 }
 
-const Row = ({data} : Props) => {
+declare global {
+    interface Window {
+      kakao: any;
+    }
+  }
+  
+  
+const { kakao } = window;
+
+const Row = ({data,idx,isEntireOrder} : Props) => {
     const [open,setOpen] = useState<boolean>(false);
     const [MyOrderInfo, SetMyOrderInfo] = useRecoilState(myOrderInfo);
-    const navigate = useNavigate();
-
-    const onClickDetailInfoBtn = useCallback(()=>{
-        navigate('/detailInfo',{
-            state : data
-        })
-    },[navigate,data]);
-
 
     const onClickDelteBtn = useCallback(()=>{
         if(window.confirm("해당 거래 내역을 삭제하시겠습니까?")){
@@ -37,6 +40,24 @@ const Row = ({data} : Props) => {
             setOpen(false);
         }
     },[MyOrderInfo, SetMyOrderInfo, data.orderIdx]);
+
+    useEffect(()=>{
+        const {La, Ma} = data.pickUpPos;
+        if(La && Ma && open){
+            var container = document.getElementById(`map_${idx}`);
+            var options = {
+                center: new kakao.maps.LatLng(La, Ma),
+                level: 3
+              };
+            var map = new kakao.maps.Map(container, options);
+            var markerPosition  = new kakao.maps.LatLng(La, Ma); 
+            var marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+            marker.setMap(map);
+        }
+    },[data.pickUpPos,open,idx]);
+
 
 
     
@@ -57,16 +78,22 @@ const Row = ({data} : Props) => {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                     
                         <Box className={styles.box}>
-                            <div className={styles.btnWrapper}>
-                                <div>
-                                    <button className={styles.showInfoBtn} onClick={onClickDetailInfoBtn}>추가 정보 확인하기</button>
+                            <div className={styles.detailHedaer}>
+                                    <div>추가 요청 사항</div>
+                                    {isEntireOrder
+                                    ? <button className={styles.acceptbtn}>수락하기</button>
+                                    :
                                     <Tooltip title="delete">
                                         <IconButton onClick={onClickDelteBtn}>
                                             <DeleteIcon style={{color : "#DB6982"}}/>
                                         </IconButton>
                                     </Tooltip>
-                                </div>
+                                    }
+                                    
                             </div>
+                            <div className={styles.detailContent}>{data.additionalRequest}</div>
+                            <div className={styles.pickUpPos}>픽업 위치</div>
+                            <div id={`map_${idx}`} style={{width:"100%", height:"300px  ", borderRadius : "4px"}}></div>
                         </Box>
                     </Collapse>
                 </TableCell>

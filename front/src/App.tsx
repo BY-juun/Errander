@@ -8,9 +8,10 @@ const FindAccount = loadable(()=>import('./page/findAccount/findAccount'));
 const SignUp = loadable(()=>import('./page/signup/signup'));
 const Register = loadable(()=>import('page/register/register'));
 const List = loadable(()=>import('page/list/list'));
-const MyOrder = loadable(()=>import('page/myorder/myorder'));
+const MyOrder = loadable(()=>import('page/myOrder/myorder'));
+const MyOrderList = loadable(()=>import('page/myOrderList/myorderList'));
 const Inquire = loadable(()=>import('page/inquire/inquire'));
-const DetailInfo = loadable(()=>import('page/detailInfo/DetailInfo'));
+
 
 
 function App() {
@@ -23,8 +24,8 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/list' element={<List/>}/>
         <Route path='/myorder' element={<MyOrder/>}/>
+        <Route path='/myorderList' element={<MyOrderList/>}/>
         <Route path='/inquire' element={<Inquire/>}/>
-        <Route path='/DetailInfo' element={<DetailInfo/>}/>
       </Routes>
     </RecoilRoot>
   );

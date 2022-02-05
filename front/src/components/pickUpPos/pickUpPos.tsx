@@ -70,6 +70,7 @@ const PickUpPos = ({setPickUpPos,classification,detail,deliveryPrice,pickUpPos}:
         <>
             <div className={styles.pickUpRoot}>
                 <div className={styles.pickUpRoot_description}>픽업받을 장소를 선택해주세요.</div>
+                <div className={styles.pickUpRoot_subdescription}>(잠시후, 지도가 표시됩니다)</div>
                 <div id="map" style={{width:"100%", height:"500px", borderRadius : "4px"}}></div>
                 <button className={styles.closeBtn} onClick={onClickConfirm}>확인</button>
             </div>

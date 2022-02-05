@@ -1,0 +1,9 @@
+@import "../../Util/util";
+.listRoot{
+    margin-top: 125px;
+    padding : 0 20%;
+    margin-bottom : 50px;
+    @include mobile{
+        padding : 0 20px;
+    }
+}
