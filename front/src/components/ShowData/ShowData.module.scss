@@ -1,0 +1,40 @@
+@import "../../Util/util";
+
+.box{
+    margin-top: 25px;
+    margin-bottom : 25px;
+    padding-left: 25px;
+}
+
+button{
+    cursor : pointer;
+}
+
+.btnWrapper{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap : 50px;
+    @include mobile{
+        gap : 10px;
+        flex-flow: wrap;
+    }
+}
+
+
+.showInfoBtn{
+    background: #0a5ca8;
+    color : white;
+    border : 0.5px solid #0a5ca8;
+    border-radius: 4px;
+    padding : 10px 20px;
+    margin-right : 25px;
+}
+
+.DeleteBtn{
+    background: #DB6982;
+    color : white;
+    border : 0.5px solid #DB6982;
+    border-radius: 4px;
+    padding : 10px 20px;
+}

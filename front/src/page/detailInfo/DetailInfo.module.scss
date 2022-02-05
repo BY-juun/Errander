@@ -1,0 +1,9 @@
+@import "../../Util/util";
+.detailInfoRoot{
+    margin-top: 125px;
+    text-align: center;
+    padding : 0 20%;
+    @include mobile{
+        padding : 0 20px;
+    }
+}

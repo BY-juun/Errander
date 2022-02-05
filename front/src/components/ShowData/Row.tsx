@@ -1,25 +1,45 @@
-import { Collapse, IconButton, TableCell, TableRow, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Collapse, IconButton, TableCell, TableRow, Tooltip } from '@mui/material';
+import React, { useCallback, useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import styles from './ShowData.module.scss';
 import { Box } from '@mui/system';
-import ShowPos from './showPos';
+import { OrderInfo } from 'types/types';
+import { useNavigate } from 'react-router';
+import { useRecoilState } from 'recoil';
+import { myOrderInfo } from 'recoil/Order/myOrder/states';
+
 
 interface Props{
-    data : {date : string,    
-        classification : string,
-        detail : string,
-        deliveryPrice : number,
-        additionalRequest : string,
-        pickUpPos : {La : number,Ma : number},
-    },
-    idx : number
+    data : OrderInfo,
 }
 
-const Row = ({data,idx} : Props) => {
+const Row = ({data} : Props) => {
     const [open,setOpen] = useState<boolean>(false);
-    const [posOpen, setPosOpen] = useState<boolean>(false);
+    const [MyOrderInfo, SetMyOrderInfo] = useRecoilState(myOrderInfo);
+    const navigate = useNavigate();
 
+    const onClickDetailInfoBtn = useCallback(()=>{
+        navigate('/detailInfo',{
+            state : data
+        })
+    },[navigate,data]);
+
+
+    const onClickDelteBtn = useCallback(()=>{
+        if(window.confirm("해당 거래 내역을 삭제하시겠습니까?")){
+            //비동기 요청
+            SetMyOrderInfo(MyOrderInfo.filter((order)=> {
+                return order.orderIdx !== data.orderIdx;
+            }))
+            alert("해당 거래내역이 삭제되었습니다");
+            setOpen(false);
+        }
+    },[MyOrderInfo, SetMyOrderInfo, data.orderIdx]);
+
+
+    
     return(
         <React.Fragment>
             <TableRow>
@@ -28,35 +48,30 @@ const Row = ({data,idx} : Props) => {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell align="right">{data.date}</TableCell>
+                <TableCell align="right">{window.innerWidth < 768 ? data.date.slice(2,data.date.length) :data.date}</TableCell>
                 <TableCell align="right">{data.classification}</TableCell>
-                <TableCell align="right">{data.detail}</TableCell>
                 <TableCell align="right">{data.deliveryPrice}</TableCell>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}> 
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box style={{padding : "25px  50px"}}>
-                            <Typography style={{marginTop : "25px"}} variant='h6' gutterBottom component="div">
-                                추가요청사항
-                            </Typography>
-                            <div style={{display : "flex",
-                            justifyContent : "space-between",
-                            alignItems:"center"}}>
-                                <Typography style={{marginTop : "10px"}} variant='body2' gutterBottom component="div">
-                                    {data.additionalRequest}
-                                </Typography>   
-                                <button style={{border : "1px solid #0a5ca8",
-                            background : "#0a5ca8",
-                            borderRadius : "4px",color : "white",
-                            cursor:"pointer",height : "50px",padding : "10px"}}
-                            onClick={()=>{setPosOpen(true)}}>픽업장소 확인</button>
+                    
+                        <Box className={styles.box}>
+                            <div className={styles.btnWrapper}>
+                                <div>
+                                    <button className={styles.showInfoBtn} onClick={onClickDetailInfoBtn}>추가 정보 확인하기</button>
+                                    <Tooltip title="delete">
+                                        <IconButton onClick={onClickDelteBtn}>
+                                            <DeleteIcon style={{color : "#DB6982"}}/>
+                                        </IconButton>
+                                    </Tooltip>
+                                </div>
                             </div>
                         </Box>
                     </Collapse>
                 </TableCell>
             </TableRow>
-            <ShowPos idx={idx} la={data.pickUpPos.La} ma={data.pickUpPos.Ma}></ShowPos>
+
         </React.Fragment>
         
     )
