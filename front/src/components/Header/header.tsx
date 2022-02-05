@@ -1,5 +1,5 @@
 import React, { useState, VFC,useCallback,useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userNickNameInfo } from 'recoil/account/states';
 import styles from './header.module.scss';
@@ -8,10 +8,15 @@ import UserInfoModal from 'components/UserInfoModal/userInfoModal';
 const Header : VFC = () => {
     const userNickName = useRecoilValue(userNickNameInfo);
     const [userInfoModal, setUserInfoModal] = useState(false);
+    const navigate = useNavigate();
 
     const onClickUserInfo = useCallback(()=>{
         setUserInfoModal(!userInfoModal);
     },[userInfoModal]);
+
+    const gotoOrderList = useCallback(()=>{
+        navigate('/list');
+    },[navigate])
 
     useEffect(()=>{
         setUserInfoModal(false);
@@ -25,7 +30,7 @@ const Header : VFC = () => {
                 </button>
             </Link>
             <div className={styles.header_menu}>
-                <button>
+                <button onClick={gotoOrderList}>
                     주문목록
                 </button>
                 <button>

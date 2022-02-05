@@ -1,0 +1,12 @@
+@import "../../Util/util";
+.myOrderRoot{
+    margin-top: 125px;
+    padding : 0 35%;
+    @include mobile{
+        padding : 0 20px;
+    }
+    @include tablet{
+        padding : 0 15%;
+        margin-top: 250px;
+    }
+}

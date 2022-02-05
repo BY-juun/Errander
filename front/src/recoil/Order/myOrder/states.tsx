@@ -1,6 +1,20 @@
 import { atom } from "recoil";
 import { OrderInfo } from "types/types";
 
+export const currentOrder = atom<OrderInfo>({
+    key : "currentOrder",
+    default : {
+        orderIdx : 10,
+        date : "2022.02.24",
+        classification : "기타",
+        detail : "새우깡 한개, 코카콜라 2개, 아몰랑",
+        deliveryPrice : 1000,
+        additionalRequest : "김수한무 거북이와 두루미 삼천갑자 동방삭",
+        pickUpTime : new Date("Sun Feb 06 2022 03:08:37 GMT+0900 (한국 표준시)"),
+        pickUpPos : {La : 37.285340, Ma:127.02444}
+    }
+});
+
 export const myOrderInfo = atom<Array<OrderInfo>>({ //나중에 selector로 비동기 처리로 바꿔야한다.
     key : 'myOrderInfo',
     default : [

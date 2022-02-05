@@ -6,7 +6,6 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import styles from './ShowData.module.scss';
 import { Box } from '@mui/system';
 import { OrderInfo } from 'types/types';
-import { useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { myOrderInfo } from 'recoil/Order/myOrder/states';
 
@@ -69,9 +68,13 @@ const Row = ({data,idx,isEntireOrder} : Props) => {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell align="right">{window.innerWidth < 768 ? data.date.slice(2,data.date.length) :data.date}</TableCell>
+                {isEntireOrder 
+                ?  <TableCell align="right">{data.pickUpTime.getHours()}시{data.pickUpTime.getMinutes()}분</TableCell>
+                : <TableCell align="right">{window.innerWidth < 768 ? data.date.slice(2,data.date.length) :data.date}</TableCell>
+                }
+                
                 <TableCell align="right">{data.classification}</TableCell>
-                <TableCell align="right">{data.deliveryPrice}</TableCell>
+                <TableCell style={{color : "#5060B4"}} align="right">{data.deliveryPrice}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}> 

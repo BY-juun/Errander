@@ -7,6 +7,9 @@
     @include mobile {
         padding : 0px 10px;
     }
+    @include tablet{
+        margin-top : 20vh;
+    }
     img{
         width : 100px;
         height : 100px;

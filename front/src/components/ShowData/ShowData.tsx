@@ -17,7 +17,11 @@ const ShowData = ({dataList,isEntireOrder} : Props) => {
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableCell/>
-                        <TableCell align="right">날짜</TableCell>
+                        {isEntireOrder 
+                        ?   <TableCell align="right">제한시간</TableCell>
+                        :   <TableCell align="right">날짜</TableCell>
+                        }
+                        
                         <TableCell align="right">분류</TableCell>
                         <TableCell align="right">배달비</TableCell>
                     </TableHead>

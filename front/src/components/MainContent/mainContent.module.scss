@@ -11,6 +11,10 @@
         gap : 10px;
         justify-items: center;
     }
+    @include tablet{
+        gap : 10px;
+        justify-items: center;
+    }
     &_item{
         width: 80%;
         position: relative;
@@ -33,6 +37,9 @@
             @include mobile{
                 background-position: 110% -10px;
             }
+            @include tablet{
+                background-position: 110% -5px;
+            }
             opacity: 0.2;
             top: 0px;
             left: 0px;
@@ -43,11 +50,21 @@
             &:before {
               transition-duration: 0.5s;
               background-position: 95% 20px;
+              @include mobile{
+                background-position: 95% -10px;
+              }
+              @include tablet{
+                background-position: 95% -5px;
+              }
               background-color: #f9f9f9;
             }
           }
         @include mobile{
             height : 30px;
+            padding : 20px;
+        }
+        @include tablet{
+            height : 60px;
             padding : 20px;
         }
         .itemTitle{

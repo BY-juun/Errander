@@ -1,0 +1,65 @@
+@import "../../Util/util";
+
+.inquireForm{
+    &_mainTitle{
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    &_mainDescription{
+        opacity: 0.4;
+        color: #333D4B;
+        margin-bottom: 40px;
+    }
+    &_title{
+        font-size: 15px;
+        color : #333D4B;
+    }
+    &_titleInput{
+        width : 100%;
+        margin-top: 10px;
+        input{
+            width : 90%;
+            @include mobile{
+                width : 90%;
+            }
+            height: 50px;
+            padding: 5%;
+            border : 1px solid #F5F5F5;
+            background: #F5F5F5;
+        }
+    }
+    &_detailInfo{
+        margin-top:20px;
+        font-size: 15px;
+        color : #333D4B;
+    }
+    &_detailInput{
+        margin-top: 10px;
+        width : 100%;
+        textarea{
+            width : 90%;
+            @include mobile{
+                width : 90%;
+            }
+            height: 300px;
+            padding: 5%;
+            border : 1px solid #F5F5F5;
+            background: #F5F5F5;
+        }
+    }
+    &_submitBtn{
+        width : 100%;
+        margin-top : 20px;
+        button{
+            cursor: pointer;
+            width : 100%;
+            border : 1px solid #0A5CA8;
+            background: #0A5CA8;
+            height : 50px;
+            padding : 20px;
+            color : #0A5CA8;
+            color : white;
+        }
+    }
+}

@@ -5,6 +5,10 @@
     @include mobile{
         padding : 0 20px;
     }
+    @include tablet{
+        padding : 0 15%;
+        margin-top: 250px;
+    }
 
     .titleHeader{
         display : flex;
@@ -127,6 +131,7 @@
         margin-top: 25px;
         width : 100%;
         button{
+            cursor: pointer;
             font-size: 15px;
             width: 100%;
             padding : 15px;
