@@ -1,15 +1,16 @@
 import { atom } from "recoil";
-import { OrderInfo } from "types/types";
+import { CurrentOrderInfo, OrderInfo } from "types/types";
 
-export const currentOrder = atom<OrderInfo>({
-    key : "currentOrder",
+export const currentMyOrder = atom<CurrentOrderInfo>({
+    key : "currentMyOrder",
     default : {
         orderIdx : 10,
+        step : "수락대기중",
         date : "2022.02.24",
         classification : "기타",
         detail : "새우깡 한개, 코카콜라 2개, 아몰랑",
         deliveryPrice : 1000,
-        additionalRequest : "김수한무 거북이와 두루미 삼천갑자 동방삭",
+        additionalRequest : "김수한무 거북이와 두루미 삼천갑자 동방삭asdfsdaf1as1f35s1ad56f165sad1f561sa56f156as1f56",
         pickUpTime : new Date("Sun Feb 06 2022 03:08:37 GMT+0900 (한국 표준시)"),
         pickUpPos : {La : 37.285340, Ma:127.02444}
     }
