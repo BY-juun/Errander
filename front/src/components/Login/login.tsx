@@ -22,6 +22,7 @@ const Login: VFC = () => {
       };
       try {
         const res = await customAxios.post("/user/login", reqData);
+        localStorage.setItem("nickname", res.data.nickname);
         setUserNickname(res.data.nickname);
       } catch (error) {
         console.log(error);

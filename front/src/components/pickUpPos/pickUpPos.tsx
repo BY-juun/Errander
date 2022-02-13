@@ -34,6 +34,7 @@ const PickUpPos = ({ additionalRequest, pickUpTime, setPickUpPos, classification
   const { location: currentLocation, error: currentError } = useCurrentLocation(geolocationOptions);
   useEffect(() => {
     if (currentLocation) {
+      console.log(currentLocation);
       var container = document.getElementById("map");
       var options = {
         center: new kakao.maps.LatLng(currentLocation.latitude, currentLocation.longitude),
@@ -49,8 +50,8 @@ const PickUpPos = ({ additionalRequest, pickUpTime, setPickUpPos, classification
       kakao.maps.event.addListener(marker, "dragend", function () {
         const { La, Ma } = marker.getPosition();
         setPickUpPos({
-          La: La,
-          Ma: Ma,
+          La: Ma,
+          Ma: La,
         });
       });
     }
@@ -60,13 +61,15 @@ const PickUpPos = ({ additionalRequest, pickUpTime, setPickUpPos, classification
     async (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
       if (window.confirm("주문을 완료하시겠습니까?")) {
+        console.log(pickUpPos);
+        console.log(currentLocation);
         let reqData = {
           date: new Date(),
           classification: classification,
           detail: detail,
           deliveryPrice: deliveryPrice,
-          pickUpPosLa: pickUpPos.La,
-          pickUpPosMa: pickUpPos.Ma,
+          pickUpPosLa: pickUpPos.La === 0 ? currentLocation?.latitude : pickUpPos.La,
+          pickUpPosMa: pickUpPos.Ma === 0 ? currentLocation?.longitude : pickUpPos.Ma,
           pickUpTime: pickUpTime,
           additionalRequest: additionalRequest,
         };
