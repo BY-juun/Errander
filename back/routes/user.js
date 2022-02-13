@@ -27,6 +27,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/nickname", async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        nickname: req.body.nickname,
+      },
+    });
+    if (user) return res.status(403).send("이미 사용중인 닉네임입니다");
+    else return res.status(200).send("ok");
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.post("/signup", async (req, res, next) => {
   try {
     //await하는애들은 비동기니까 try catch로 감싸기
@@ -72,8 +87,9 @@ router.post("/login", (req, res, next) => {
       return next(err);
     }
     if (info) {
-      return res.status(401).send(info.reason);
+      return res.status(401).send(info.message);
     }
+
     return req.login(user, async (loginErr) => {
       if (loginErr) {
         console.error(loginErr);
@@ -88,6 +104,12 @@ router.post("/login", (req, res, next) => {
       return res.status(200).json(fullUserWithoutPassword);
     });
   })(req, res, next);
+});
+
+router.get("/logout", (req, res, next) => {
+  req.logout();
+  req.session.destroy();
+  res.send("ok");
 });
 
 module.exports = router;

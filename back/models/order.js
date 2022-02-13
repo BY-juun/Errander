@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      classfication: {
+      classification: {
         type: DataTypes.STRING(30),
         allowNull: false,
       },
@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      pickUpPosLA: {
+      pickUpPosLa: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      pickUpPosMA: {
+      pickUpPosMa: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },

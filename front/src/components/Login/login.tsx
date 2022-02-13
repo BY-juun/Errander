@@ -6,24 +6,28 @@ import useInput from "Util/hooks/useInput";
 import styles from "./login.module.scss";
 import { SiKakaotalk } from "react-icons/si";
 import { AiFillFacebook, AiFillGoogleSquare } from "react-icons/ai";
-
-import request from "Util/request";
-
+import { customAxios } from "Util/customAxios";
 const Login: VFC = () => {
   const [id, , onChangeId] = useInput("");
   const [pwd, , onChangPwd] = useInput("");
   const setUserNickname = useSetRecoilState(userNickNameInfo);
 
   const onSubmit = useCallback(
-    (e) => {
+    async (e) => {
       //로그인 정보를 포함한 비동기 요청
       e.preventDefault();
       const reqData = {
-        id: id,
+        email: id,
         password: pwd,
       };
-      const res = request("POST", "/user/login", reqData);
-      setUserNickname("병준");
+      try {
+        const res = await customAxios.post("/user/login", reqData);
+        setUserNickname(res.data.nickname);
+      } catch (error) {
+        console.log(error);
+        alert("ID 혹은 비밀번호를 확인해주세요");
+        return;
+      }
     },
     [id, pwd, setUserNickname]
   );
@@ -34,7 +38,7 @@ const Login: VFC = () => {
         <input placeholder="ID(이메일 주소)" value={id} onChange={onChangeId} />
       </div>
       <div className={styles.login_input}>
-        <input placeholder="PASSWORD" value={pwd} onChange={onChangPwd} />
+        <input type="password" placeholder="PASSWORD" value={pwd} onChange={onChangPwd} />
       </div>
       <div>
         <button className={styles.login_button}>로그인</button>
