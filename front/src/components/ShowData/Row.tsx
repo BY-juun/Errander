@@ -44,6 +44,8 @@ const Row = ({ data, idx, isEntireOrder }: Props) => {
     const La = data.pickUpPosLa;
     const Ma = data.pickUpPosMa;
     if (La && Ma && open) {
+      console.log(La);
+      console.log(Ma);
       var container = document.getElementById(`map_${idx}`);
       var options = {
         center: new kakao.maps.LatLng(La, Ma),
