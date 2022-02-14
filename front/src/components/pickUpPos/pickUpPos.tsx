@@ -1,6 +1,8 @@
 import Header from "components/Header/header";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useRecoilRefresher_UNSTABLE } from "recoil";
+import { entireOrderInfo } from "recoil/Order/entireOrder/states";
 import { customAxios } from "Util/customAxios";
 import useCurrentLocation from "Util/hooks/useCurrentLocation";
 import styles from "./pickUpPos.module.scss";
@@ -32,6 +34,7 @@ interface Props {
 const PickUpPos = ({ additionalRequest, pickUpTime, setPickUpPos, classification, detail, deliveryPrice, pickUpPos }: Props) => {
   const navigate = useNavigate();
   const { location: currentLocation, error: currentError } = useCurrentLocation(geolocationOptions);
+  const refreshMainOrderList = useRecoilRefresher_UNSTABLE(entireOrderInfo);
   useEffect(() => {
     if (currentLocation) {
       console.log(currentLocation);
@@ -76,6 +79,7 @@ const PickUpPos = ({ additionalRequest, pickUpTime, setPickUpPos, classification
         try {
           await customAxios.post("/order/register", reqData);
           alert("주문이 완료되었습니다!");
+          refreshMainOrderList();
           navigate("/");
         } catch (error) {
           console.error(error);
